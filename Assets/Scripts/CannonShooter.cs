@@ -6,24 +6,21 @@ public class CannonShooter : MonoBehaviour
 {
     [Header("Bullet Settings")]
     public GameObject bulletPrefab;
-    public Transform firePoint;
-    public float shootForce = 500f;
+    public float launchVelocity = 1500f;
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && LevelManager.instance.CanShoot())
+        if (Input.GetMouseButtonDown(0) && LevelManager.instance != null && LevelManager.instance.CanShoot())
         {
             Shoot();
+
+            LevelManager.instance.BulletUsed();
         }
     }
 
     void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-        
-        bulletRb.AddForce(firePoint.forward * shootForce);
-        
-        LevelManager.instance.BulletUsed();
+        GameObject launchedObject = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        launchedObject.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, launchVelocity, 0));
     }
 }

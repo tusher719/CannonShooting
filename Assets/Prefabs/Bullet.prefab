@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletLifetime: 5
-  shootForce: 3
-  bounceDamping: 0.2
+  shootForce: 10
+  bounceDamping: 0.5
   maxBounces: 5
-  minBounceVelocity: 0.2
+  minBounceVelocity: 0.5

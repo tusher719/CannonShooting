@@ -17,22 +17,9 @@ public class TargetObject : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
-            // rb.isKinematic = true;
             rb.mass = objectMass;
         }
     }
-
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Bullet"))
-    //     {
-    //         if (rb != null && rb.isKinematic)
-    //         {
-    //             // rb.isKinematic = false;
-    //             // rb.useGravity = true;
-    //         }
-    //     }
-    // }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] TextMeshProUGUI bulletText;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI targetText;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject losePanel;
 
@@ -45,7 +46,6 @@ public class LevelManager : MonoBehaviour
     {
         if (index >= levelDataArray.Length)
         {
-            Debug.LogError("Level index out of range!");
             return;
         }
 
@@ -70,7 +70,8 @@ public class LevelManager : MonoBehaviour
     public void TargetDestroyed()
     {
         destroyedBoxes++;
-        
+        UpdateUI();
+
         if (destroyedBoxes >= totalBoxes && !isGameOver)
         {
             WinGame();
@@ -119,10 +120,20 @@ public class LevelManager : MonoBehaviour
     void UpdateUI()
     {
         if (bulletText != null)
-            bulletText.text = " " + remainingBullets;
-        
+        {
+            bulletText.text = $"{remainingBullets}";
+        }
+
         if (scoreText != null)
-            scoreText.text = " " + score;
+        {
+            scoreText.text = $"{score}";
+        }
+
+        if (targetText != null)
+        {
+            int remainingTargets = totalBoxes - destroyedBoxes;
+            targetText.text = $"{remainingTargets}";
+        }
     }
 
     void WinGame()
@@ -159,10 +170,6 @@ public class LevelManager : MonoBehaviour
         if (currentLevelIndex < levelDataArray.Length)
         {
             LoadLevel(currentLevelIndex);
-        }
-        else
-        {
-            Debug.Log("All levels completed!");
         }
     }
 }
